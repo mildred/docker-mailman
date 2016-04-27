@@ -28,6 +28,19 @@ POSTFIX_STYLE_VIRTUAL_DOMAINS = ['lists.example.com']
 DEB_LISTMASTER = '$POSTMASTER'
 EOF
 
+if [[ -n "$USER" ]] && [[ -n "$PASSWORD" ]]; then
+  echo "$USER:$PASSWORD" >/etc/lighttpd.passwd
+  cat <<EOF >>/etc/lighttpd/lighttpd.conf
+  auth.require = (
+    "/" => (
+      "method"  => "digest",
+      "realm"   => "Mailman",
+      "require" => "valid-user"
+    )
+  )
+EOF
+fi
+
 /usr/lib/mailman/bin/genaliases
 
 exec supervisord

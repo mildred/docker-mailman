@@ -8,6 +8,6 @@ mailman:
   volumes:
     - /srv/mailman:/var/lib/mailman
   environment:
-    DOMAIN=lists.example.net
-    POSTMASTER=postmaster@example.net
+    DOMAIN: lists.example.net
+    POSTMASTER: postmaster@example.net
 
