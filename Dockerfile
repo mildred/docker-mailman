@@ -16,11 +16,16 @@ RUN apt-get update && apt-get install -y \
 	--no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN cp -R /var/lib/mailman /var/lib/mailman-defaults
+
 # Lighttpd configuration
 COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-EXPOSE 25 80
+COPY entry.sh /entry.sh
 
-ENTRYPOINT [ "supervisord" ]
+EXPOSE 25 80
+VOLUME /var/lib/mailman
+
+ENTRYPOINT [ "/entry.sh" ]
