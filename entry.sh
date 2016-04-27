@@ -41,6 +41,11 @@ if [[ -n "$USER" ]] && [[ -n "$PASSWORD" ]]; then
 EOF
 fi
 
+if [[ -n "$SITE_PASSWORD" ]]; then
+  mmsitepass "$SITE_PASSWORD"
+  chmod 644 /var/lib/mailman/data/adm.pw
+fi
+
 /usr/lib/mailman/bin/genaliases
 
 exec supervisord
