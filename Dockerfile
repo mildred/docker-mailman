@@ -28,9 +28,9 @@ COPY entry.sh /entry.sh
 EXPOSE 25 80
 VOLUME /var/lib/mailman
 # Your lists domain: lists.example.org
-ENV DOMAIN
+ENV DOMAIN lists.example.net
 # Postmaster, default is postmaster@$DOMAIN (stripped from lists. at the
 # beginning)
-ENV POSTMASTER
+#ENV POSTMASTER postmaster@example.net
 
 ENTRYPOINT [ "/entry.sh" ]

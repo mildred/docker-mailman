@@ -1,0 +1,13 @@
+# vim: sts=2:sw=2:et
+mailman:
+  image: mildred/mailman
+  restart: always
+  ports:
+    - "8001:80"
+    - "25:25"
+  volumes:
+    - /srv/mailman:/var/lib/mailman
+  environment:
+    DOMAIN=lists.example.net
+    POSTMASTER=postmaster@example.net
+
